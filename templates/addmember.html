@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Member</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/uicss.css')}}">
+	<!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/util.css')}}"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/main.css')}}"> -->
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/w3.css')}}">
+	<!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/bootstrap/css/bootstrap.min.css')}}"> -->
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/fonts/iconic/css/material-design-iconic-font.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/animate/animate.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/css-hamburgers/hamburgers.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/animsition/css/animsition.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/select2/select2.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/daterangepicker/daterangepicker.css')}}">
+<!--===============================================================================================-->
+<script type="text/javascript" src="{{url_for('static', filename = 'js/validation.js')}}"></script>
+  <script type="text/javascript">
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('datez').innerHTML = today.toDateString()
+  document.getElementById('timez').innerHTML =
+  "&nbsp;&nbsp;" + h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
+<script>
+
+function w3_open() {
+  var mySidebar = document.getElementById("mySidebar");
+  var overlayBg = document.getElementById("myOverlay");
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  var mySidebar = document.getElementById("mySidebar");
+  var overlayBg = document.getElementById("myOverlay");
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
+</head>
+<style>
+  @import "compass/css3";
+</style>
+
+<body onload="startTime()">
+	<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
+  <span class="w3-bar-item w3-right"><a href="/logout"><button class="exclude fa fa-sign-out" style="color:white;border-radius: 20px;background-color: #96092c; padding: 7px 7px 7px 7px; cursor: pointer;">Log Out</button></a></span>
+  <a href="/about"><span class="w3-bar-item" style="color: white;">FaceRec</span></a>
+  <span class="w3-bar-item w3-right w3-teal w3-round"><b><i class="fa fa-user fa-fw"></i></b>&nbsp;{{username}}</span>
+  <span class="w3-bar-item w3-right" id="timez"></span>
+  <span class="w3-bar-item w3-right"><span class="fa fa-clock-o fa-fw"></span></span>
+  <span class="w3-bar-item w3-right" id="datez"></span>
+  </div>
+  <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer; display: block;" title="close side menu" id="myOverlay"></div>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="{{url_for('static',filename = 'usericon.jpg')}}" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span>Welcome, <strong>{{username}}</strong></span><br>
+      <a href="/dashboard" class="w3-bar-item w3-button"><i class="fa fa-clipboard"></i></a>
+      <a href="/home" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="/viewrecords" class="w3-bar-item w3-button"><i class="fa fa-book"></i></a>
+    </div>
+  </div>
+  <hr style="height: 0px;border: none;border-bottom: 0.5px solid black;">
+  <div class="w3-container">
+    <h5>Dashboard</h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
+    <a href="/home" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+    <a href="/viewmembers" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>&nbsp; Members</a>
+    <a href="/newsession" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>&nbsp; Sessions</a>
+    <a href="/viewrecords" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>&nbsp; Records Book</a>
+    <a href="/dashboard" class="w3-bar-item w3-button w3-padding"><i class="fa fa-clipboard fa-fw"></i>&nbsp; Dashboard</a>
+    <h2>Today's Sessions</h2>
+
+    {% for i in today_present %}
+    {{i}}
+    <div class="w3-light-grey w3-round-xlarge">
+        <div class="w3-round-xlarge w3-teal w3-center w3-teal w3-container" style="width:{{today_present[i]}}%">
+          {{today_present[i]}}%
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+</nav>
+
+<div class="t">
+<!-- <center>
+  <h1>{{username}}</h1>
+</center> -->
+</div>
+
+<div>
+		<center><br>
+
+      <h1 style="color: white;">Add Member</h1>
+      <h2 style="color: white;">{{r}}</h2>
+			<form method="POST" action="/addmember" enctype="multipart/form-data" name="memform" onsubmit="return validateMember();">
+				<span id="f"><input type="text" name="membername" placeholder="Name"></span><br>
+				<span id="f"><input type="number" name="rollno" placeholder="Roll No."></span><br>
+				<span id="f"><input type="email" name="email" placeholder="E-mail"></span><br>
+				<span id="f"><input type="number" name="contact" placeholder="Contact"></span><br>
+        <center><label for="file-upload" class="custom-file-upload" style="border: 1px solid #ccc;display: inline-block;padding: 6px 12px;cursor: pointer;background-color: #45a049;color: white;border-radius: 80px;"><i class="fa fa-cloud-upload"></i>&nbsp;Upload Image</label></center>
+				<span id="f"><input type="file" name="photo" accept="image/*" data-type='image' id="file-upload" style="display: none;" /></span><br>
+				<button id="b">Submit</button>
+			</form>
+		</center>
+	</div>
+</body>
+</html>
+
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Records Book</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+    <script src="{{url_for('static', filename = 'js/application.js')}}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/uicss.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/trialcss.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/w3.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+
+    <script type="text/javascript">
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('datez').innerHTML = today.toDateString()
+  document.getElementById('timez').innerHTML =
+  "&nbsp" + h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
+<style type="text/css">
+  table{min-width: 80%;}
+</style>
+</head>
+
+<body onload="startTime()">
+  <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <a href="/home"><span class="w3-bar-item"><i class="fa fa-home"></i>&nbsp;Home</span></a>
+  <span class="w3-bar-item w3-right"><a href="/logout"><button class="exclude fa fa-sign-out" style="color:white;border-radius: 20px;background-color: #96092c; padding: 7px 7px 7px 7px;">Log Out</button></a></span>
+  <span class="w3-bar-item w3-right w3-teal"><b><i class="fa fa-user"></i></b>&nbsp;{{u}}</span>
+  <span class="w3-bar-item w3-right" id="timez"></span>
+  <span class="w3-bar-item w3-right"><span class="fa fa-clock-o fa-fw"></span></span>
+  <span class="w3-bar-item w3-right" id="datez"></span>
+  </div>
+<div class="container" style="margin-top: 5%;">
+  <div class="jumbotron">
+    <h1>Attendance Records Book</h1>
+    <p>Filters Available</p>
+  </div>
+</div>
+    
+</div>
+<div>
+  <div id="uname">{{u}}</div>
+    <div class="container" id="content">
+      <center>
+            <div>
+               <a id = "filepath" href="#"><button class="w3-blue"><i class="fa fa-download"></i>&nbsp;&nbsp;Download Excel Sheet</button></a>
+            </div>
+            <br>
+          <select name="date_cat" id="date_cat">
+              <option>Date</option>
+              {% for i in d: %}
+                  <option>{{i}}</option>
+              {% endfor %}
+          </select>
+          <select name="session_cat" id="session_cat">
+              <option>Session</option>
+              {% for i in s: %}
+                  <option>{{i}}</option>
+              {% endfor %}
+          </select>
+          <select name="member_cat" id="member_cat">
+              <option>Member</option>
+              {% for i in n: %}
+                  <option>{{i}}</option>
+              {% endfor %}
+          </select>
+          <button onclick="myfunc()">Show</button>
+      </center>
+    </div>
+    <div id="log"></div>
+    <div id="memrec"></div>
+</div>
+
+
+</body>
+</html>

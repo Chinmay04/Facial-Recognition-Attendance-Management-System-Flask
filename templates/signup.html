@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Sign Up</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{{url_for('static',filename='css/images/icons/favicon.ico')}}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/fonts/iconic/css/material-design-iconic-font.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/animate/animate.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/css-hamburgers/hamburgers.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/animsition/css/animsition.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/select2/select2.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/vendor/daterangepicker/daterangepicker.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/main.css')}}">
+	<script src="{{url_for('static', filename = 'js/validation.js')}}"></script>
+<!--===============================================================================================-->
+<style type="text/css">
+	@font-face {
+  font-family: Poppins-Regular;
+  src: url('{{url_for('static', filename = 'css/fonts/poppins/Poppins-Regular.ttf')}}'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('{{url_for('static', filename = 'css/fonts/poppins/Poppins-Medium.ttf')}}'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('{{url_for('static', filename = 'css/fonts/poppins/Poppins-Bold.ttf')}}'); 
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('{{url_for('static', filename = 'css/fonts/poppins/Poppins-SemiBold.ttf')}}'); 
+}
+</style>
+
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('{{url_for('static',filename = 'css/images/bg-01.jpg')}}');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" action='/home', method='POST' name="signupform" onsubmit="return validateSignup()">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Sign Up
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="repassword" placeholder="Re-Enter Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="email" name="email" placeholder="E-mail">
+						<span class="focus-input100" data-placeholder="&#xf192;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="number" name="contact" placeholder="Contact">
+						<span class="focus-input100" data-placeholder="&#xf193;"></span>
+					</div>
+
+					
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Sign Up
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Members</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>    
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="{{url_for('static', filename = 'js/application.js')}}"></script>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/uicss.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/w3.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/trialcss.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/fonts/iconic/css/material-design-iconic-font.min.css')}}">
+	<script type="text/javascript">
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('datez').innerHTML = today.toDateString()
+  document.getElementById('timez').innerHTML =
+  "&nbsp" + h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
+<style type="text/css">
+  table{min-width: 25%;}
+</style>
+</head>
+<body onload="startTime()">
+	<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
+  <a href="/home"><span class="w3-bar-item"><i class="fa fa-home"></i>&nbsp;Home</span></a>
+  <span class="w3-bar-item w3-right"><button class="exclude fa fa-sign-out" style="color:white;border-radius: 20px;background-color: #96092c; padding: 7px 7px 7px 7px;">Log Out</button></span>
+  <span class="w3-bar-item w3-right w3-teal"><b><i class="fa fa-user"></i></b>&nbsp;&nbsp;{{u}}</span>
+  <span class="w3-bar-item w3-right" id="timez"></span>
+  <span class="w3-bar-item w3-right"><span class="fa fa-clock-o fa-fw"></span></span>
+  <span class="w3-bar-item w3-right" id="datez"></span>
+  </div>
+
+	<center>
+		<select name="memname" id="memname" style="margin-top: 5%;">
+			{% for i in n: %}
+				<option>{{i}}</option>
+			{% endfor %}
+		</select>
+		<button onclick="mymemfunc()">Show</button>
+		<div class="funcs add">
+		<div id="rec">
+			<h1 style="color: white;">Select a Member</h1>
+		</div>
+		<h2 id="totalatt" style="color: white;"></h2>
+    <center><button onclick="delMeme()" style="background-color: red; width: 20%;"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete Member</button></center>
+		</div>
+		
+	</center>
+<center>
+<h1><div id="chartHeader" style="color: white;"></div></center></h1><br>
+	<div id="chart_per" style="width: 80%; margin-bottom: 5%; margin-left: 10%;"></div></center>
+<!-- <center> -->
+ <center> <h1 style="color: white;">All Members</h1> </center>
+	<ul class="w3-ul w3-card-4 w3-white" style="width: 80%;margin-left: 10%;margin-bottom: 5%;">
+      <li class="w3-padding-16">
+        <span class="w3-xlarge w3-padding-small">Photo</span>
+        <span class="w3-xlarge w3-padding-small">ID</span> 
+        <span class="w3-xlarge w3-padding-small">&nbsp;&nbsp;Roll No</span>
+        <span class="w3-xlarge w3-padding-small">&nbsp;&nbsp;Name</span>
+        <span class="w3-xlarge w3-padding-small" style="float: right;">Attendance</span>
+        <br>
+      </li>
+      {% for i in all_members_record %}
+      <li class="w3-padding-16 w3-hover-blue">
+        &nbsp;&nbsp;
+        <img src="/static/User%20Accounts/{{u}}/images/{{i[1]}}.jpg" class="w3-left w3-circle w3-margin-right" style="width:40px;">&nbsp;
+        <span class="w3-xlarge w3-padding-large">{{i[0]}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="w3-xlarge w3-padding-large">{{i[2]}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="w3-xlarge w3-padding-large">{{i[1]}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="w3-xlarge w3-padding-small" style="float: right;">{{i[6]}}%</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>
+      </li>
+      {% endfor %}
+    </ul>
+
+   
+<!-- </center> -->
+</body>
+</html>
