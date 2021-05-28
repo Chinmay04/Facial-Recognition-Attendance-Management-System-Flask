@@ -9,5 +9,8 @@ itsdangerous
 Jinja2
 MarkupSafe
 Werkzeug
-
+Flask-SocketIO
+cv2
+MySQL-python
+mysql-connector-python
 
