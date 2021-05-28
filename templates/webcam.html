@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>WebCam</title>
-<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/uicss.css')}}">
-</head>
+	<title>ASL Recognition</title>
+	<style type="text/css">
+	body{background-color: #220037;}
+	.t{
+	color: white;
+	text-shadow: 1.6px 1px 3px #ffffff;
+	box-shadow: 2;
+	font-size:200%;
+	}
+	</style>
 <body>
-<center>
-	<img src="{{url_for('video_feed')}}"><br>
-	<a href='/home'><button>Stop Attendance</button></a>
-</center>
+<center><span class="t">American Sign Language<br>Recognizer</span></center>
+<br>
+<center><img src="{{url_for('video_feed')}}"></center>
+<br><br>
+<center><span class="t">Make a Sign Letter with Your Hand</span></center>
 </body>
 </html>

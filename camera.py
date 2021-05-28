@@ -1,45 +1,38 @@
+#!/usr/bin/env python3.7
+import cv2
+import numpy as np
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.preprocessing.image import load_img
+from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.models import load_model
+
+model_load = load_model('model_i1.h5')
+
+def predict(frame):
+    results = {0:'A', 1:'B', 2:'C'}
+    new_array = cv2.resize(frame,(50,50))
+    new_array = np.array(new_array).reshape(-1,50,50) 
+    new_array = new_array/255.0
+    new_array = new_array.reshape(-1,50,50,3)
+    prediction = np.argmax(model_load.predict(new_array), axis=-1)[0]
+    return results[prediction]
+
+
 import cv2
 from imutils.video import WebcamVideoStream
-from recognizer import Detector
-from flask import session
-from markattendance import Mark
-import time
-import datetime
 
 class VideoCamera(object):
-    sessionName = ''
-    def __init__(self, username):
+    def __init__(self):
         self.stream = WebcamVideoStream(src=0).start()
-        self.username = username
-        self.obj1 = Detector(self.username)
-        self.all_encodings_to_numpy = self.obj1.fetch_encodings()
-        self.all_names = self.obj1.fetch_names()
-        self.obj2 = Detector(self.username)#trying
-        print(self.all_names)
-        self.session_date = datetime.datetime.now().strftime('%Y-%m-%d')
-        self.session_time = datetime.datetime.now().strftime('%H:%M:%S')
-
-        self.temp = 0
-
-        self.obj3 = Mark(self.username, self.sessionName, self.session_date, self.session_time, self.all_names)
-
     def __del__(self):
         self.stream.stop()
 
     def get_frame(self):
-        self.temp = self.temp + 1
         image = self.stream.read()
-
-        if self.temp%500==0:
-            # self.obj2 = Detector(self.username)
-            self.image, self.name = self.obj2.check(image, self.all_encodings_to_numpy, self.all_names)
-
-            if self.name:
-                image = cv2.putText(image, self.name, (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2, cv2.LINE_AA)
-                self.obj3.present(self.name)
-
+        letter = predict(image)
+        image = cv2.putText(image, letter, (50, 50), cv2.FONT_HERSHEY_SIMPLEX , 1, (255, 0, 0) , 2, cv2.LINE_AA)
         ret, jpeg = cv2.imencode('.jpg', image)
-        data = [] #needed?-yes
+        data = []
         data.append(jpeg.tobytes())
         return data
 
@@ -53,6 +46,5 @@ class Generate():
 
 
 
-
-
-
+    
+    
