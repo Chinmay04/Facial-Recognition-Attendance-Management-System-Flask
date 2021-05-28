@@ -13,3 +13,17 @@ Installation:
 
 Create database named rootdb with following query
 
+CREATE DATABASE `rootdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+Create table roottable with following query
+
+CREATE TABLE `roottable` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `accname` varchar(50) DEFAULT NULL,
+  `accpassword` varchar(100) DEFAULT NULL,
+  `accmail` varchar(50) DEFAULT NULL,
+  `acccontact` mediumtext,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
